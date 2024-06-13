@@ -19,38 +19,33 @@ import java.util.Objects;
  *
  * @author carlos.fernandes
  */
-
 @Entity
-public class Empresa {
-    
+public class TipoConta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
-    
-    @NotNull 
-    @Column
-    private Long codigo;
-    
+
+    @NotBlank
     @NotNull
     @Column
     private String nome;
-    
+
     @Column
     private boolean status;
-    
+
     @Column
     private LocalDateTime dataCriacao;
-    
+
     @Column
     private LocalDateTime ultimaAtualizacao;
 
-    public Empresa() {
+    public TipoConta() {
     }
 
-    public Empresa(Long id, Long codigo, String nome, boolean status) {
+    public TipoConta(Long id, String nome, boolean status) {
         this.id = id;
-        this.codigo = codigo;
         this.nome = nome;
         this.status = status;
         this.dataCriacao = LocalDateTime.now();
@@ -63,14 +58,6 @@ public class Empresa {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -104,17 +91,17 @@ public class Empresa {
     public void setUltimaAtualizacao(LocalDateTime ultimaAtualizacao) {
         this.ultimaAtualizacao = ultimaAtualizacao;
     }
-    
+
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         dataCriacao = LocalDateTime.now();
         status = true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -129,10 +116,9 @@ public class Empresa {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Empresa other = (Empresa) obj;
+        final TipoConta other = (TipoConta) obj;
         return Objects.equals(this.id, other.id);
     }
-    
     
     
 }
