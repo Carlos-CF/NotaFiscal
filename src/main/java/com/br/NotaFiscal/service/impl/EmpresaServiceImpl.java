@@ -114,7 +114,7 @@ public class EmpresaServiceImpl implements EmpresaService {
     public ResponseEntity<Object> excluir(Long idObjeto) throws Exception {
        
         empresaRepository.findById(idObjeto)
-                .orElseThrow(()-> new NoSuchElementException("A Empresa com ID " + idObjeto + " não foi encontreada!"));
+                .orElseThrow(()-> new NoSuchElementException("A Empresa com ID " + idObjeto + " não foi encontrada!"));
         
         empresaRepository.deleteById(idObjeto);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>("A Empresa foi excluída com sucesso."));

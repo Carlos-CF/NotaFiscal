@@ -33,6 +33,7 @@ public class Empresa {
     private Long codigo;
     
     @NotNull
+    @NotBlank
     @Column
     private String nome;
     

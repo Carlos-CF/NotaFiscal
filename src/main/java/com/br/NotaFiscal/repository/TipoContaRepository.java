@@ -4,6 +4,7 @@
  */
 package com.br.NotaFiscal.repository;
 
+import com.br.NotaFiscal.model.TipoConta;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface TipoConta extends JpaRepository<TipoConta, Long>{
+public interface TipoContaRepository extends JpaRepository<TipoConta, Long>{
     
     public boolean existsByNome(String nome);
     
