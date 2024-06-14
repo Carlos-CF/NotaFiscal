@@ -39,8 +39,8 @@ public class EmpresaMapperImpl implements CustomObjectMapper<Empresa, EmpresaDTO
     public Empresa converterParaEntidade(EmpresaDTO dto) {
         
         Empresa empresa = new Empresa();
-        empresa.setId(empresa.getId());
-        empresa.setCodigo(empresa.getCodigo());
+        empresa.setId(dto.getId());
+        empresa.setCodigo(dto.getCodigo());
         empresa.setNome(dto.getNome());
         empresa.setStatus(dto.isStatus());
         empresa.setDataCriacao(dto.getDataCriacao());
