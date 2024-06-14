@@ -86,6 +86,10 @@ public class TipoContaServiceImpl implements TipoContaService {
         TipoConta dadosDto = tipoContaMapper.converterParaEntidade(objeto);
         TipoConta paraEditar = tipoContaRepository.findById(idObjeto)
                 .orElseThrow(() -> new NoSuchElementException("A Tipo Conta com ID " + idObjeto + "não foi encontrada!"));
+        
+           if (tipoContaRepository.existsByNome(objeto.getNome())) {
+            return ResponseEntity.badRequest().body(new ApiResponse<>("Não é possivel cadastrar o Tipo Conta, Já existe outra com o mesmo nome."));
+        }
 
         dadosDto.setUltimaAtualizacao(LocalDateTime.now());
         dadosDto.setId(idObjeto);

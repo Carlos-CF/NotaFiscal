@@ -93,6 +93,14 @@ public class EmpresaServiceImpl implements EmpresaService {
         Empresa paraEditar = empresaRepository.findById(idObjeto)
                 .orElseThrow(()-> new NoSuchElementException("A Empresa com ID " + idObjeto + "não foi encontrada!"));
         
+         if (empresaRepository.existsByNome(objeto.getNome())) {
+            return ResponseEntity.badRequest().body(new ApiResponse<>("Não é possivel cadastrar a Empresa. Já existe outra Empresa com o mesmo nome."));
+        }
+
+        if (empresaRepository.existsByCodigo(objeto.getCodigo())) {
+            return ResponseEntity.badRequest().body(new ApiResponse<>("Não é possivel cadastrar a Empresa. Já existe outro Codigo com o mesmo numero."));
+        }
+        
         dadosDto.setUltimaAtualizacao(LocalDateTime.now());
         dadosDto.setId(idObjeto);
         dadosDto.setCodigo(objeto.getCodigo());
