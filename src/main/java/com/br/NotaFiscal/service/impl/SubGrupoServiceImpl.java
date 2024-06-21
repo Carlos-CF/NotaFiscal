@@ -41,7 +41,7 @@ public class SubGrupoServiceImpl implements SubGrupoService{
                 .orElseThrow(()-> new NoSuchElementException("O subGrupo com ID " + idObjeto + " não foi encontrado!"));
         
         objeto.setStatus(!objeto.isStatus());
-        objeto.setUltimaAtualizao(LocalDateTime.now());
+        objeto.setUltimaAtualizacao(LocalDateTime.now());
         SubGrupo objetoAtualizado = subGrupoRepository.saveAndFlush(objeto);
         
         SubGrupoDTO objetoDTO = subGrupoMapper.converterParaDto(objetoAtualizado);
@@ -92,7 +92,7 @@ public class SubGrupoServiceImpl implements SubGrupoService{
             return ResponseEntity.badRequest().body(new ApiResponse<>("Não é possivel cadastrar o SubGrupo. Já existe outro SubGrupo com o mesmo nome."));
         }
         
-        dadosDto.setUltimaAtualizao(LocalDateTime.now());
+        dadosDto.setUltimaAtualizacao(LocalDateTime.now());
         dadosDto.setId(idObjeto);
         BeanUtils.copyProperties(dadosDto, paraEditar, "id");
         SubGrupo objetoAtualizado = subGrupoRepository.saveAndFlush(dadosDto);
