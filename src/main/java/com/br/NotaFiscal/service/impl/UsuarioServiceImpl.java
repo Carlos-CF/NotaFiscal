@@ -17,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -32,6 +33,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private CustomObjectMapper<Usuario, UsuarioDTO> usuarioMapper;
+    
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public ResponseEntity<Object> cadastrar(UsuarioDTO objeto) throws Exception {
@@ -47,7 +51,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setNomeCompleto(objeto.getNomeCompleto());
         usuario.setEmail(objeto.getEmail());
-        usuario.setSenha(objeto.getSenha());
+        usuario.setSenha(passwordEncoder.encode(objeto.getSenha()));
 
         Usuario objetoCriado = usuarioRepository.saveAndFlush(usuario);
         return ResponseEntity.created(
@@ -88,6 +92,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         dadosDto.setUltimaAtualizacao(LocalDateTime.now());
         dadosDto.setId(idObjeto);
         BeanUtils.copyProperties(dadosDto, paraEditar, "id");
+        paraEditar.setSenha(passwordEncoder.encode(paraEditar.getSenha()));
         Usuario objetoAtualizado = usuarioRepository.saveAndFlush(dadosDto);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>(usuarioMapper.converterParaDto(objetoAtualizado)));
     }
