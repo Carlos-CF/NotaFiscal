@@ -20,4 +20,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
     public boolean existsByEmail(String email);
     
     public Optional<Usuario> findByNomeCompleto(String nomeCompleto);
+    
+     public Optional<Usuario> findByEmail(String email);
 }
