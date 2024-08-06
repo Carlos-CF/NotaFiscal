@@ -4,24 +4,36 @@
  */
 package com.br.NotaFiscal.model.dto;
 
-import com.br.NotaFiscal.model.SubGrupo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 /**
  *
  * @author carlos.fernandes
  */
-public class SubGrupoDTO {
+public class FornecedorDTO {
     
-    private Long id;
+    private Long id; 
     
     @NotNull(message = "O nome precisa ser informado!")
     @NotBlank(message = "O nome não pode estar em branco!")
     private String nome;
+    
+    @NotNull(message = "Fantasia precisa ser informado!")
+    @NotBlank(message = "Fantasia não pode estar em branco!")
+    private String fantasia;
+    
+    @NotNull(message = "O CNPJ precisa ser informado!")
+    @NotBlank
+    @CNPJ(message = "O CNPJ precisa ser válido!")
+    private String CNPJ;
+    
+    @NotNull(message = "O Codigo Datavale precisa ser informado!")
+    private Long codDatavale;
     
     private boolean status;
     
@@ -32,17 +44,6 @@ public class SubGrupoDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(type = "string", pattern = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$", example = "2024-01-01 12:00:00")
     private LocalDateTime ultimaAtualizacao;
-
-    public SubGrupoDTO() {
-    }
-
-    public SubGrupoDTO(Long id, String nome, boolean status) {
-        this.id = id;
-        this.nome = nome;
-        this.status = status;
-        this.dataCriacao = LocalDateTime.now();
-        this.ultimaAtualizacao = LocalDateTime.now();
-    }
 
     public Long getId() {
         return id;
@@ -58,6 +59,30 @@ public class SubGrupoDTO {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getFantasia() {
+        return fantasia;
+    }
+
+    public void setFantasia(String fantasia) {
+        this.fantasia = fantasia;
+    }
+
+    public String getCNPJ() {
+        return CNPJ;
+    }
+
+    public void setCNPJ(String CNPJ) {
+        this.CNPJ = CNPJ;
+    }
+
+    public Long getCodDatavale() {
+        return codDatavale;
+    }
+
+    public void setCodDatavale(Long codDatavale) {
+        this.codDatavale = codDatavale;
     }
 
     public boolean isStatus() {
@@ -84,7 +109,4 @@ public class SubGrupoDTO {
         this.ultimaAtualizacao = ultimaAtualizacao;
     }
     
-    
-    
-
 }

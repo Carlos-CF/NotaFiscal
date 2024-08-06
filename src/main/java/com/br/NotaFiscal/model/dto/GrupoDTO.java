@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  *
  * @author carlos.fernandes
  */
-public class SubGrupoDTO {
+public class GrupoDTO {
     
     private Long id;
     
@@ -24,6 +24,8 @@ public class SubGrupoDTO {
     private String nome;
     
     private boolean status;
+   
+    private SubGrupo subGrupo;
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(type = "string", pattern = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$", example = "2024-01-01 12:00:00")
@@ -32,17 +34,6 @@ public class SubGrupoDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(type = "string", pattern = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$", example = "2024-01-01 12:00:00")
     private LocalDateTime ultimaAtualizacao;
-
-    public SubGrupoDTO() {
-    }
-
-    public SubGrupoDTO(Long id, String nome, boolean status) {
-        this.id = id;
-        this.nome = nome;
-        this.status = status;
-        this.dataCriacao = LocalDateTime.now();
-        this.ultimaAtualizacao = LocalDateTime.now();
-    }
 
     public Long getId() {
         return id;
@@ -68,6 +59,14 @@ public class SubGrupoDTO {
         this.status = status;
     }
 
+    public SubGrupo getSubGrupo() {
+        return subGrupo;
+    }
+
+    public void setSubGrupo(SubGrupo subGrupo) {
+        this.subGrupo = subGrupo;
+    }
+
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
@@ -85,6 +84,4 @@ public class SubGrupoDTO {
     }
     
     
-    
-
 }
