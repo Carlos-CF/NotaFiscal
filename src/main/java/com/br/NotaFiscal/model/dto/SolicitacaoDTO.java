@@ -5,6 +5,7 @@
 package com.br.NotaFiscal.model.dto;
 
 import com.br.NotaFiscal.model.Empresa;
+import com.br.NotaFiscal.model.Fornecedor;
 import com.br.NotaFiscal.model.TipoSolicitacao;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -45,6 +46,8 @@ public class SolicitacaoDTO {
     private Empresa empresa;
     
     private TipoSolicitacao tipoSolicitacao;
+    
+    private Fornecedor fornecedor;
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(type = "string", pattern = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$", example = "2024-01-01 12:00:00")
@@ -132,6 +135,14 @@ public class SolicitacaoDTO {
 
     public void setUltimaAtualizacao(LocalDateTime ultimaAtualizacao) {
         this.ultimaAtualizacao = ultimaAtualizacao;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
     
     

@@ -30,6 +30,7 @@ public class SolicitacaoMapperImpl implements CustomObjectMapper<Solicitacao, So
         dto.setDataEntrega(entity.getDataEntrega());
         dto.setEmpresa(entity.getEmpresa());
         dto.setTipoSolicitacao(entity.getTipoSolicitacao());
+        dto.setFornecedor(entity.getFornecedor());
         dto.setDataCriacao(entity.getDataCriacao());
         dto.setUltimaAtualizacao(entity.getUltimaAtualizacao());
 
@@ -49,6 +50,7 @@ public class SolicitacaoMapperImpl implements CustomObjectMapper<Solicitacao, So
         solicitacao.setDataEntrega(dto.getDataEntrega());
         solicitacao.setEmpresa(dto.getEmpresa());
         solicitacao.setTipoSolicitacao(dto.getTipoSolicitacao());
+        solicitacao.setFornecedor(dto.getFornecedor());
         solicitacao.setDataCriacao(dto.getDataCriacao());
         solicitacao.setUltimaAtualizacao(dto.getUltimaAtualizacao());
 

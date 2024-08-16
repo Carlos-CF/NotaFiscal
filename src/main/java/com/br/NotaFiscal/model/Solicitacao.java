@@ -61,6 +61,10 @@ public class Solicitacao {
     @JoinColumn(name = "idTipoSolicitacao")
     private TipoSolicitacao tipoSolicitacao;
     
+    @ManyToOne
+    @JoinColumn(name = "idFornecedor")
+    private Fornecedor fornecedor;
+    
     @Column
     private LocalDateTime dataCriacao;
     
@@ -74,7 +78,8 @@ public class Solicitacao {
         this.id = id;
     }
 
-    public Solicitacao(Long id, Long numero, Long valor, LocalDate dataEmissao, LocalDate dataVencimento, LocalDate dataEntrega, Empresa empresa, TipoSolicitacao tipoSolicitacao){
+    public Solicitacao(Long id, Long numero, Long valor, LocalDate dataEmissao, LocalDate dataVencimento, LocalDate dataEntrega, Empresa empresa, TipoSolicitacao tipoSolicitacao, Fornecedor fornecedor) {
+        this.id = id;
         this.numero = numero;
         this.valor = valor;
         this.dataEmissao = dataEmissao;
@@ -82,6 +87,7 @@ public class Solicitacao {
         this.dataEntrega = dataEntrega;
         this.empresa = empresa;
         this.tipoSolicitacao = tipoSolicitacao;
+        this.fornecedor = fornecedor;
         this.dataCriacao = LocalDateTime.now();
         this.ultimaAtualizacao = LocalDateTime.now();
     }
@@ -149,7 +155,15 @@ public class Solicitacao {
     public void setTipoSolicitacao(TipoSolicitacao tipoSolicitacao) {
         this.tipoSolicitacao = tipoSolicitacao;
     }
-       
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
@@ -165,11 +179,6 @@ public class Solicitacao {
     public void setUltimaAtualizacao(LocalDateTime ultimaAtualizacao) {
         this.ultimaAtualizacao = ultimaAtualizacao;
     }
-    
-    @PrePersist
-    public void prePersist(){
-        dataCriacao = LocalDateTime.now();
-    }    
 
     @Override
     public int hashCode() {
