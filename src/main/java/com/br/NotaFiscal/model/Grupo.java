@@ -39,11 +39,6 @@ public class Grupo {
     @Column
     private boolean status;
     
-    @ManyToOne
-    @JoinColumn(name = "idSubGrupo")
-    @JsonIgnoreProperties({"nome", "status", "dataCriacao", "ultimaAtualizacao"})
-    private SubGrupo subGrupo;
-    
     @Column
     private LocalDateTime dataCriacao;
     
@@ -57,7 +52,6 @@ public class Grupo {
         this.id = id;
         this.nome = nome;
         this.status = status;
-        this.subGrupo = subGrupo;
         this.dataCriacao = LocalDateTime.now();
         this.ultimaAtualizacao = LocalDateTime.now();
     }
@@ -84,14 +78,6 @@ public class Grupo {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public SubGrupo getSubGrupo() {
-        return subGrupo;
-    }
-
-    public void setSubGrupo(SubGrupo subGrupo) {
-        this.subGrupo = subGrupo;
     }
 
     public LocalDateTime getDataCriacao() {

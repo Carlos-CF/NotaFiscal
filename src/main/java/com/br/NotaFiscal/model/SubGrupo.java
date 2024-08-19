@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -35,6 +37,10 @@ public class SubGrupo {
     
     @Column
     private boolean status;
+    
+    @ManyToOne
+    @JoinColumn(name = "idGrupo")
+    private Grupo grupo;
     
     @Column
     private LocalDateTime dataCriacao;
@@ -75,6 +81,14 @@ public class SubGrupo {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     public LocalDateTime getDataCriacao() {

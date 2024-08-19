@@ -26,7 +26,6 @@ public class GrupoMapperImpl implements CustomObjectMapper<Grupo, GrupoDTO>{
         dto.setId(entity.getId());
         dto.setNome(entity.getNome());
         dto.setStatus(entity.isStatus());
-        dto.setSubGrupo(entity.getSubGrupo());
         dto.setDataCriacao(entity.getDataCriacao());
         dto.setUltimaAtualizacao(entity.getUltimaAtualizacao());
         
@@ -40,7 +39,6 @@ public class GrupoMapperImpl implements CustomObjectMapper<Grupo, GrupoDTO>{
         grupo.setId(dto.getId());
         grupo.setNome(dto.getNome());
         grupo.setStatus(dto.isStatus());
-        grupo.setSubGrupo(dto.getSubGrupo());
         grupo.setDataCriacao(dto.getDataCriacao());
         grupo.setUltimaAtualizacao(dto.getUltimaAtualizacao());
         

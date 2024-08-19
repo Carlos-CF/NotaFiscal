@@ -4,6 +4,7 @@
  */
 package com.br.NotaFiscal.model.dto;
 
+import com.br.NotaFiscal.model.Grupo;
 import com.br.NotaFiscal.model.SubGrupo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,6 +25,8 @@ public class SubGrupoDTO {
     private String nome;
     
     private boolean status;
+    
+    private Grupo grupo;
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Schema(type = "string", pattern = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$", example = "2024-01-01 12:00:00")
@@ -66,6 +69,14 @@ public class SubGrupoDTO {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     public LocalDateTime getDataCriacao() {

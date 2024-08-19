@@ -59,7 +59,6 @@ public class GrupoServiceImpl implements GrupoService{
             Grupo grupo = new Grupo();
             grupo.setNome(objeto.getNome());
             grupo.setStatus(objeto.isStatus());
-            grupo.setSubGrupo(objeto.getSubGrupo());
             BeanUtils.copyProperties(objeto,"id");
             Grupo objetoCriado = grupoRepository.saveAndFlush(grupo);
             return ResponseEntity.created(

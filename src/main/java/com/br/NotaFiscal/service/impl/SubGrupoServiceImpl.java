@@ -59,6 +59,7 @@ public class SubGrupoServiceImpl implements SubGrupoService{
         SubGrupo subGrupo = new SubGrupo();
         subGrupo.setNome(objeto.getNome());
         subGrupo.setStatus(objeto.isStatus());
+        subGrupo.setGrupo(objeto.getGrupo());
         
         SubGrupo objetoCriado = subGrupoRepository.saveAndFlush(subGrupo);
         return ResponseEntity.created(

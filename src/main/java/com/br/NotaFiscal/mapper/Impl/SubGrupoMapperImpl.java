@@ -26,6 +26,7 @@ public class SubGrupoMapperImpl implements CustomObjectMapper<SubGrupo, SubGrupo
         dto.setId(entity.getId());
         dto.setNome(entity.getNome());
         dto.setStatus(entity.isStatus());
+        dto.setGrupo(entity.getGrupo());
         dto.setDataCriacao(entity.getDataCriacao());
         dto.setUltimaAtualizacao(entity.getUltimaAtualizacao());
         
@@ -39,6 +40,7 @@ public class SubGrupoMapperImpl implements CustomObjectMapper<SubGrupo, SubGrupo
         subGrupo.setId(dto.getId());
         subGrupo.setNome(dto.getNome());
         subGrupo.setStatus(dto.isStatus());
+        subGrupo.setGrupo(dto.getGrupo());
         subGrupo.setDataCriacao(dto.getDataCriacao());
         subGrupo.setUltimaAtualizacao(dto.getUltimaAtualizacao());
         
