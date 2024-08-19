@@ -17,6 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @author carlos.fernandes
  */
 
+/*
+
 @Configuration
 public class InitialConfig {
     
@@ -29,6 +31,7 @@ public class InitialConfig {
     @EventListener
     public void appReady(ApplicationReadyEvent event) throws Exception {
     
+        
         Usuario usuario = new Usuario();
         
         usuario.setNomeCompleto("Carlos Fernandes");
@@ -39,3 +42,5 @@ public class InitialConfig {
     }
     
 }
+
+*/

@@ -4,8 +4,6 @@
  */
 package com.br.NotaFiscal.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +14,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -26,7 +23,7 @@ import java.util.Objects;
  */
 
 @Entity
-public class Solicitacao {
+public class Conta {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,33 +34,40 @@ public class Solicitacao {
     @Column
     private Long numero;
     
+    @NotBlank
+    @Column
+    private String nome;
+    
     @NotNull
     @Column
     private Long valor;
     
-    @NotNull
     @Column
-    private LocalDate dataEmissao;
+    private Long valorImposto;
     
-    @NotNull
     @Column
-    private LocalDate dataVencimento;
+    private boolean status;
     
-    @NotNull
-    @Column
-    private LocalDate dataEntrega;
-    
+
     @ManyToOne
     @JoinColumn(name = "idEmpresa")
     private Empresa empresa;
     
     @ManyToOne
-    @JoinColumn(name = "idTipoSolicitacao")
-    private TipoSolicitacao tipoSolicitacao;
+    @JoinColumn(name = "idTipoConta")
+    private TipoConta tipoConta;
+    
+    @ManyToOne
+    @JoinColumn(name = "idFrequenciaConta")
+    private FrequenciaConta frequenciaConta;
     
     @ManyToOne
     @JoinColumn(name = "idFornecedor")
     private Fornecedor fornecedor;
+    
+    @ManyToOne
+    @JoinColumn(name = "idGrupo")
+    private Grupo grupo;
     
     @Column
     private LocalDateTime dataCriacao;
@@ -71,23 +75,25 @@ public class Solicitacao {
     @Column
     private LocalDateTime ultimaAtualizacao;
 
-    public Solicitacao() {
+    public Conta() {
     }
-
-    public Solicitacao(Long id) {
+    
+    public Conta(Long id) {
         this.id = id;
     }
 
-    public Solicitacao(Long id, Long numero, Long valor, LocalDate dataEmissao, LocalDate dataVencimento, LocalDate dataEntrega, Empresa empresa, TipoSolicitacao tipoSolicitacao, Fornecedor fornecedor) {
+    public Conta(Long id, Long numero, String nome, Long valor, Long valorImposto, boolean status, Empresa empresa, TipoConta tipoConta, FrequenciaConta frequenciaConta, Fornecedor fornecedor, Grupo grupo) {
         this.id = id;
         this.numero = numero;
+        this.nome = nome;
         this.valor = valor;
-        this.dataEmissao = dataEmissao;
-        this.dataVencimento = dataVencimento;
-        this.dataEntrega = dataEntrega;
+        this.valorImposto = valorImposto;
+        this.status = status;
         this.empresa = empresa;
-        this.tipoSolicitacao = tipoSolicitacao;
+        this.tipoConta = tipoConta;
+        this.frequenciaConta = frequenciaConta;
         this.fornecedor = fornecedor;
+        this.grupo = grupo;
         this.dataCriacao = LocalDateTime.now();
         this.ultimaAtualizacao = LocalDateTime.now();
     }
@@ -108,6 +114,14 @@ public class Solicitacao {
         this.numero = numero;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public Long getValor() {
         return valor;
     }
@@ -116,28 +130,20 @@ public class Solicitacao {
         this.valor = valor;
     }
 
-    public LocalDate getDataEmissao() {
-        return dataEmissao;
+    public Long getValorImposto() {
+        return valorImposto;
     }
 
-    public void setDataEmissao(LocalDate dataEmissao) {
-        this.dataEmissao = dataEmissao;
+    public void setValorImposto(Long valorImposto) {
+        this.valorImposto = valorImposto;
     }
 
-    public LocalDate getDataVencimento() {
-        return dataVencimento;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setDataVencimento(LocalDate dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
-
-    public LocalDate getDataEntrega() {
-        return dataEntrega;
-    }
-
-    public void setDataEntrega(LocalDate dataEntrega) {
-        this.dataEntrega = dataEntrega;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public Empresa getEmpresa() {
@@ -148,12 +154,20 @@ public class Solicitacao {
         this.empresa = empresa;
     }
 
-    public TipoSolicitacao getTipoSolicitacao() {
-        return tipoSolicitacao;
+    public TipoConta getTipoConta() {
+        return tipoConta;
     }
 
-    public void setTipoSolicitacao(TipoSolicitacao tipoSolicitacao) {
-        this.tipoSolicitacao = tipoSolicitacao;
+    public void setTipoConta(TipoConta tipoConta) {
+        this.tipoConta = tipoConta;
+    }
+
+    public FrequenciaConta getFrequenciaConta() {
+        return frequenciaConta;
+    }
+
+    public void setFrequenciaConta(FrequenciaConta frequenciaConta) {
+        this.frequenciaConta = frequenciaConta;
     }
 
     public Fornecedor getFornecedor() {
@@ -162,6 +176,14 @@ public class Solicitacao {
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     public LocalDateTime getDataCriacao() {
@@ -179,16 +201,17 @@ public class Solicitacao {
     public void setUltimaAtualizacao(LocalDateTime ultimaAtualizacao) {
         this.ultimaAtualizacao = ultimaAtualizacao;
     }
-
+    
     @PrePersist
     public void prePersist(){
         dataCriacao = LocalDateTime.now();
+        status = true;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -203,10 +226,9 @@ public class Solicitacao {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Solicitacao other = (Solicitacao) obj;
+        final Conta other = (Conta) obj;
         return Objects.equals(this.id, other.id);
     }
-    
     
     
 }

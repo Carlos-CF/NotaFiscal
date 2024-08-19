@@ -49,6 +49,7 @@ public class SolicitacaoServiceImpl implements SolicitacaoService{
         solicitacao.setDataEntrega(objeto.getDataEntrega());
         solicitacao.setEmpresa(objeto.getEmpresa());
         solicitacao.setTipoSolicitacao(objeto.getTipoSolicitacao());
+        solicitacao.setFornecedor(objeto.getFornecedor());
         BeanUtils.copyProperties(objeto, "id");
         Solicitacao objetoCriado = solicitacaoRepository.saveAndFlush(solicitacao);
         
